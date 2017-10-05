@@ -1,4 +1,4 @@
-package com.crudtest.service;
+package com.crudtest.service.user;
 
 import com.crudtest.model.User;
 

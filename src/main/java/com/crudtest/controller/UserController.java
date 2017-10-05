@@ -1,7 +1,7 @@
 package com.crudtest.controller;
 
 import com.crudtest.model.User;
-import com.crudtest.service.UserService;
+import com.crudtest.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
