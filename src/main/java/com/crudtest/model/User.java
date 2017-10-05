@@ -1,22 +1,23 @@
-package com.crudtest.crudtest.domain;
+package com.crudtest.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class UserEntity {
+@Table(name = "USER")
+public class User {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
+        @Column(name = "USER_ID")
         private Long id;
 
+        @Column(name = "FIRST_NAME")
         private String firstName;
+        @Column(name = "LAST_NAME")
         private String lastName;
 
-        public UserEntity(){}
-        public UserEntity(String firstName, String lastName){
+        public User(){}
+        public User(String firstName, String lastName){
             this.firstName = firstName;
             this.lastName = lastName;
         }
