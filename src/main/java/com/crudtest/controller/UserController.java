@@ -22,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value="/", method = RequestMethod.GET)
+    @RequestMapping(value="/index", method = RequestMethod.GET)
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
@@ -31,7 +31,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/", method = RequestMethod.POST)
+    @RequestMapping(value="/index", method = RequestMethod.POST)
     public ModelAndView addUser(@Valid User user, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.getUserByLastName(user.getLastName());
@@ -50,6 +50,7 @@ public class UserController {
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     public ModelAndView viewUsers(){
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("users", userService.findAll());
         modelAndView.setViewName("result");
         return modelAndView;
     }

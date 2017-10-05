@@ -2,9 +2,12 @@ package com.crudtest.service;
 
 import com.crudtest.model.User;
 
+import java.util.List;
+
 
 public interface UserService {
 
-    public User getUserByLastName(String lastName);
-    public void saveUser(User user);
+    User getUserByLastName(String lastName);
+    void saveUser(User user);
+    List<User> findAll();
 }
