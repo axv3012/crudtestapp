@@ -22,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value="/index", method = RequestMethod.GET)
+    @RequestMapping(value="/", method = RequestMethod.GET)
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
@@ -31,7 +31,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/index", method = RequestMethod.POST)
+    @RequestMapping(value="/", method = RequestMethod.POST)
     public ModelAndView addUser(@Valid User user, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.getUserByLastName(user.getLastName());
@@ -39,11 +39,11 @@ public class UserController {
             bindingResult.rejectValue("lastName","error.user","This last name already exists");
         }
         if (bindingResult.hasErrors()){
-            modelAndView.setViewName("index");
+            modelAndView.setViewName("result");
         }else {
             userService.saveUser(user);
             modelAndView.addObject("users", new User());
-            modelAndView.setViewName("index");
+            modelAndView.setViewName("redirect:result");
         }
         return modelAndView;
     }
