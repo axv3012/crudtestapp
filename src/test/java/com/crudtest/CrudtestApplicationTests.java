@@ -1,4 +1,4 @@
-package com.crudtest.crudtest;
+package com.crudtest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

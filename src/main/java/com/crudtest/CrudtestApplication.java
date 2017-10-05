@@ -1,4 +1,4 @@
-package com.crudtest.crudtest;
+package com.crudtest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
