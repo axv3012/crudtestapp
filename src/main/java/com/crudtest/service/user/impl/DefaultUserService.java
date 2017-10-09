@@ -29,8 +29,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     public List<User> findAll() {
-        users = this.userRepository.findAll();
-        return users;
+        return this.userRepository.findAll();
     }
 
 
