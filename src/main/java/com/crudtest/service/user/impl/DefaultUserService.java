@@ -6,9 +6,6 @@ import com.crudtest.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,11 +15,13 @@ public class DefaultUserService implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    List<User> users = new ArrayList<User>();
-
 
     @Override
     public void saveUser(User user) {
+        if(user.getDateCreated() == null){
+            user.setDateCreated(new Date());
+        }
+        user.setDateModified(new Date());
         userRepository.save(user);
     }
 
@@ -31,6 +30,8 @@ public class DefaultUserService implements UserService {
     public List<User> findAll() {
         return this.userRepository.findAll();
     }
+
+
 
 
 }

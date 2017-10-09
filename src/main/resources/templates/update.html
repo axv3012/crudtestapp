@@ -10,7 +10,6 @@
     <input type="hidden" th:value="${updateobject.id}" id="id" name="id"/>
     First Name: <input type="text" th:field="*{firstName}"/><br/>
     Last Name: <input type="text" th:field="*{lastName}"/><br/>
-    Date Modified: <input type="text" th:value="*{#dates.format(dateModified, 'dd-MMM-yyyy HH:mm:ss')}" readonly="readonly"/><br/>
     <input type="submit" value="Submit"/>
 </form>
 </body>

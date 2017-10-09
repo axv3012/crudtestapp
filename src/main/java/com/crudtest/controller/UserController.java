@@ -9,10 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 @Controller
 public class UserController {
@@ -35,7 +31,7 @@ public class UserController {
     }
 
     @RequestMapping(value="/", method = RequestMethod.POST)
-    public ModelAndView addUser(@Valid User user, BindingResult bindingResult){
+    public ModelAndView addUser(User user, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()){
             modelAndView.setViewName("result");

@@ -1,9 +1,6 @@
 package com.crudtest.model;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,65 +10,70 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        @Column(name = "USER_ID")
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "USER_ID")
+    private Long id;
 
-        @Column(name = "FIRST_NAME")
-        private String firstName;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
 
-        @Column(name = "LAST_NAME")
-        private String lastName;
+    @Column(name = "LAST_NAME")
+    private String lastName;
 
 
-        @Column(name = "DATE_CREATED", updatable = false)
-        private Date dateCreated = new Date();
-        @Column(name = "DATE_MODIFIED")
-        private Date dateModified = new Date();
+    @Column(name = "DATE_CREATED", updatable = false)
+    private Date dateCreated;
+    @Column(name = "DATE_MODIFIED")
+    private Date dateModified;
 
-    public User(){}
-        public User(String firstName, String lastName){
-            this.firstName = firstName;
-            this.lastName = lastName;
-        }
-        public Long getId() {
-            return id;
-        }
+    public User(){
 
-        public void setId(Long id) {
-            this.id = id;
-        }
+    }
+    public User(String firstName, String lastName, Date dateCreated, Date dateModified){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
+    }
 
-        public String getFirstName() {
-            return firstName;
-        }
+    public Long getId() {
+        return id;
+    }
 
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public String getLastName() {
-            return lastName;
-        }
+    public String getFirstName() {
+        return firstName;
+    }
 
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
-        public Date getDateCreated() {
-            return dateCreated;
-        }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-        public void setDateCreated(Date dateCreated) {
-            this.dateCreated = dateCreated;
-        }
+    public String getLastName() {
+        return lastName;
+    }
 
-        public Date getDateModified() {
-            return dateModified;
-        }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public Date getDateCreated() {
+        return dateCreated;
+    }
 
-        public void setDateModified(Date dateModified) {
-            this.dateModified = dateModified;
-        }
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Date getDateModified() {
+        return dateModified;
+    }
+
+    public void setDateModified(Date dateModified) {
+        this.dateModified = dateModified;
+    }
 
 }
