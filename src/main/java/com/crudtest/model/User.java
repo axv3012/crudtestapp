@@ -1,9 +1,16 @@
 package com.crudtest.model;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "USER")
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 
         @Id
@@ -11,12 +18,20 @@ public class User {
         @Column(name = "USER_ID")
         private Long id;
 
+
         @Column(name = "FIRST_NAME")
         private String firstName;
+
         @Column(name = "LAST_NAME")
         private String lastName;
 
-        public User(){}
+
+        @Column(name = "DATE_CREATED", updatable = false)
+        private Date dateCreated = new Date();
+        @Column(name = "DATE_MODIFIED")
+        private Date dateModified = new Date();
+
+    public User(){}
         public User(String firstName, String lastName){
             this.firstName = firstName;
             this.lastName = lastName;
@@ -44,6 +59,20 @@ public class User {
         public void setLastName(String lastName) {
             this.lastName = lastName;
         }
+        public Date getDateCreated() {
+            return dateCreated;
+        }
 
+        public void setDateCreated(Date dateCreated) {
+            this.dateCreated = dateCreated;
+        }
+
+        public Date getDateModified() {
+            return dateModified;
+        }
+
+        public void setDateModified(Date dateModified) {
+            this.dateModified = dateModified;
+        }
 
 }

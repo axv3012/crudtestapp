@@ -4,11 +4,14 @@ import com.crudtest.model.User;
 import com.crudtest.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @Controller
@@ -34,10 +37,6 @@ public class UserController {
     @RequestMapping(value="/", method = RequestMethod.POST)
     public ModelAndView addUser(@Valid User user, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.getUserByLastName(user.getLastName());
-        if(userExists!=null){
-            bindingResult.rejectValue("lastName","error.user","This last name already exists");
-        }
         if (bindingResult.hasErrors()){
             modelAndView.setViewName("result");
         }else {
@@ -47,12 +46,24 @@ public class UserController {
         }
         return modelAndView;
     }
+
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     public ModelAndView viewUsers(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("users", userService.findAll());
         modelAndView.setViewName("result");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(@ModelAttribute User updateobject, Model model){
+        model.addAttribute("updateobject", updateobject);
+        return "update";
+    }
+    @RequestMapping("/updateuser")
+    public String updateService(@ModelAttribute("updateobject") User user){
+        userService.saveUser(user);
+        return "redirect:result";
     }
 
 }

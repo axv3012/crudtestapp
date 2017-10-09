@@ -19,6 +19,10 @@
             <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">First name error message</td>
         </tr>
         <tr>
+            <td>Date Created:</td>
+            <td><input type="text" th:value="*{#dates.format(dateCreated, 'dd-MMM-yyyy HH:mm:ss')}" readonly="readonly"/></td>
+        </tr>
+        <tr>
             <td><button type="submit">Submit</button></td>
         </tr>
     </table>
