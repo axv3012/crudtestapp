@@ -52,14 +52,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute User updateobject, Model model){
-        model.addAttribute("updateobject", updateobject);
-        return "update";
+    public ModelAndView update(@ModelAttribute User updateobject){
+        ModelAndView modelAndView = new ModelAndView("update");
+        modelAndView.addObject("updateobject", updateobject);
+        return modelAndView;
     }
     @RequestMapping("/updateuser")
-    public String updateService(@ModelAttribute("updateobject") User user){
+    public ModelAndView updateService(@ModelAttribute("updateobject") User user){
+        ModelAndView modelAndView = new ModelAndView();
         userService.saveUser(user);
-        return "redirect:result";
+        modelAndView.setViewName("redirect:result");
+        return modelAndView;
     }
 
 }
