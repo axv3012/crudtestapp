@@ -30,15 +30,12 @@ public class UserController {
     }
 
     @RequestMapping(value="/", method = RequestMethod.POST)
-    public ModelAndView addUser(User user, BindingResult bindingResult){
+    public ModelAndView addUser(User user){
         ModelAndView modelAndView = new ModelAndView();
-        if (bindingResult.hasErrors()){
-            modelAndView.setViewName("result");
-        }else {
-            userService.saveUser(user);
-            modelAndView.addObject("users", new User());
-            modelAndView.setViewName("redirect:result");
-        }
+
+        userService.saveUser(user);
+        modelAndView.addObject("users", new User());
+        modelAndView.setViewName("redirect:result");
         return modelAndView;
     }
 
@@ -50,7 +47,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update")
     public ModelAndView update(@ModelAttribute User updateobject){
         ModelAndView modelAndView = new ModelAndView("update");
         modelAndView.addObject("updateobject", updateobject);

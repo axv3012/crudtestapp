@@ -21,20 +21,13 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-
     @Column(name = "DATE_CREATED", updatable = false)
     private Date dateCreated;
+
     @Column(name = "DATE_MODIFIED")
     private Date dateModified;
 
     public User(){
-
-    }
-    public User(String firstName, String lastName, Date dateCreated, Date dateModified){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateCreated = dateCreated;
-        this.dateModified = dateModified;
     }
 
     public Long getId() {
