@@ -8,8 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-
 
 @Controller
 public class UserController {
@@ -32,26 +30,33 @@ public class UserController {
     }
 
     @RequestMapping(value="/", method = RequestMethod.POST)
-    public ModelAndView addUser(@Valid User user, BindingResult bindingResult){
+    public ModelAndView addUser(User user){
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.getUserByLastName(user.getLastName());
-        if(userExists!=null){
-            bindingResult.rejectValue("lastName","error.user","This last name already exists");
-        }
-        if (bindingResult.hasErrors()){
-            modelAndView.setViewName("result");
-        }else {
-            userService.saveUser(user);
-            modelAndView.addObject("users", new User());
-            modelAndView.setViewName("redirect:result");
-        }
+
+        userService.saveUser(user);
+        modelAndView.addObject("users", new User());
+        modelAndView.setViewName("redirect:result");
         return modelAndView;
     }
+
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     public ModelAndView viewUsers(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("users", userService.findAll());
         modelAndView.setViewName("result");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/update")
+    public ModelAndView update(@ModelAttribute User updateobject){
+        ModelAndView modelAndView = new ModelAndView("update");
+        modelAndView.addObject("updateobject", updateobject);
+        return modelAndView;
+    }
+    @RequestMapping("/updateuser")
+    public ModelAndView updateService(@ModelAttribute("updateobject") User user){
+        ModelAndView modelAndView = new ModelAndView("redirect:result");
+        userService.saveUser(user);
         return modelAndView;
     }
 
