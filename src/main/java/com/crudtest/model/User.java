@@ -21,13 +21,16 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Column(name = "EMAIL")
+    private String email;
+
     @Column(name = "DATE_CREATED", updatable = false)
     private Date dateCreated;
 
     @Column(name = "DATE_MODIFIED")
     private Date dateModified;
 
-    public User(){
+    public User() {
     }
 
     public Long getId() {
@@ -53,6 +56,15 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Date getDateCreated() {
         return dateCreated;
     }

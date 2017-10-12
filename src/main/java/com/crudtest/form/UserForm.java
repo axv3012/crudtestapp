@@ -2,11 +2,14 @@ package com.crudtest.form;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Size;
 
 public class UserForm {
 
     private Long id;
+
     @NotEmpty
+    @Size(min = 2, max = 30)
     private String firstName;
     @NotEmpty
     private String lastName;

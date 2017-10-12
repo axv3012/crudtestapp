@@ -1,5 +1,6 @@
 package com.crudtest.service.user.impl;
 
+import com.crudtest.form.UserForm;
 import com.crudtest.model.User;
 import com.crudtest.repository.UserRepository;
 import com.crudtest.service.user.UserService;
@@ -17,10 +18,13 @@ public class DefaultUserService implements UserService {
 
 
     @Override
-    public void saveUser(User user) {
-        if(user.getDateCreated() == null){
-            user.setDateCreated(new Date());
-        }
+    public void saveUser(UserForm userForm) {
+        User user = new User();
+        user.setId(userForm.getId());
+        user.setFirstName(userForm.getFirstName());
+        user.setLastName(userForm.getLastName());
+        user.setEmail(userForm.getEmail());
+        user.setDateCreated(new Date());
         user.setDateModified(new Date());
         userRepository.save(user);
     }
@@ -30,8 +34,5 @@ public class DefaultUserService implements UserService {
     public List<User> findAll() {
         return this.userRepository.findAll();
     }
-
-
-
 
 }
