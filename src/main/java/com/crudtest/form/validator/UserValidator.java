@@ -28,7 +28,7 @@ public class UserValidator implements Validator {
             errors.rejectValue("email", "email.invalid", "Please enter a valid email address");
         }
         if (!userForm.getEmail().equals(userForm.getRepeatedEmail())) {
-            errors.rejectValue("repeatedEmail", "email.repeated", "Please enter same email.");
+            errors.rejectValue("repeatedEmail", "email.repeated", "Please enter the same email.");
         }
 
     }
