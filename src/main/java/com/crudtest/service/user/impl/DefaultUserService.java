@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service("userService")
 public class DefaultUserService implements UserService {
@@ -35,4 +36,8 @@ public class DefaultUserService implements UserService {
         return this.userRepository.findAll();
     }
 
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
 }
