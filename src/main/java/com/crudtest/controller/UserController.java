@@ -2,7 +2,6 @@ package com.crudtest.controller;
 
 import com.crudtest.form.UserForm;
 import com.crudtest.form.validator.UserValidator;
-import com.crudtest.model.User;
 import com.crudtest.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +43,7 @@ public class UserController {
     public ModelAndView addUser(@ModelAttribute("form") @Valid UserForm form, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
 
-        if(userService.findByEmail(form.getEmail()) != null){
+        if (userService.findByEmail(form.getEmail()) != null) {
             bindingResult.rejectValue("email", "email", "There is already a user registered with the email provided.");
             modelAndView.setViewName("index");
         }

@@ -3,6 +3,7 @@ package com.crudtest.form.validator;
 import com.crudtest.form.UserForm;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import java.util.regex.Pattern;
@@ -24,11 +25,16 @@ public class UserValidator implements Validator {
 
 
         UserForm userForm = (UserForm) o;
-        if (userForm.getEmail() != null && !pattern.matcher(userForm.getEmail()).matches()) {
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "email.form",
+                "Please don't leave email empty or with whitespaces");
+
+        if (!pattern.matcher(userForm.getEmail()).matches()) {
             errors.rejectValue("email", "email.invalid", "Please enter a valid email address");
         }
+
         if (!userForm.getEmail().equals(userForm.getRepeatedEmail())) {
-            errors.rejectValue("repeatedEmail", "email.repeated", "Please enter the same email.");
+            errors.rejectValue("repeatedEmail", "email.repeated", "Please enter the same email as above.");
         }
 
     }

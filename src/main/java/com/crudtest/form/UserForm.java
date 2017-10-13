@@ -13,9 +13,9 @@ public class UserForm {
     private String firstName;
     @NotEmpty
     private String lastName;
-    @NotEmpty
+
     private String email;
-    @NotEmpty
+
     private String repeatedEmail;
 
     public Long getId() {
