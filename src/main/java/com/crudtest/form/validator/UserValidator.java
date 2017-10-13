@@ -29,7 +29,7 @@ public class UserValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "email.form",
                 "Please don't leave email empty or with whitespaces");
 
-        if (!pattern.matcher(userForm.getEmail()).matches()) {
+        if (userForm.getEmail() != null && !pattern.matcher(userForm.getEmail()).matches()) {
             errors.rejectValue("email", "email.invalid", "Please enter a valid email address");
         }
 
