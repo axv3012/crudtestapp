@@ -25,7 +25,12 @@ public class UserValidator implements Validator {
 
 
         UserForm userForm = (UserForm) o;
+        validateEmail(userForm, errors);
+        validatePassword(userForm, errors);
 
+    }
+
+    public void validateEmail(UserForm userForm, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "email.form",
                 "Please don't leave email empty or with whitespaces");
 
@@ -36,7 +41,18 @@ public class UserValidator implements Validator {
         if (!userForm.getEmail().equals(userForm.getRepeatedEmail())) {
             errors.rejectValue("repeatedEmail", "email.repeated", "Please enter the same email as above.");
         }
+    }
 
+    public void validatePassword(UserForm userForm, Errors errors) {
+
+        ValidationUtils.rejectIfEmpty(errors, "password", "password.invalid", "Please input an password");
+
+        if (userForm.getPassword() == null) {
+            errors.rejectValue("password", "password.invalid", "Please enter a valid password");
+        }
+        if (!userForm.getPassword().equals(userForm.getRepeatedPassword())) {
+            errors.rejectValue("password", "password.repeated", "Please enter the same password");
+        }
     }
 
 }
