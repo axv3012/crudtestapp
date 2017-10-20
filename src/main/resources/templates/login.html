@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<div class="container">
+    <h1>Login Page</h1>
+    <!--<p th:if="${loginError}" class="error">Wrong user or password</p-->
+    <form th:action="@{/login}" method="post">
+
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <div class="form-group">
+            <label for="email">Email</label>:
+            <input type="email" id="email" name="email" autofocus="autofocus" required="required" class="form-control"
+                   placeholder="Enter email"/> <br/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>:
+            <input type="password" id="password" name="password" required="required" class="form-control"
+                   placeholder="password"/> <br/>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Log in"/>
+        <a href="/" class="btn btn-primary" role="button">Home</a>
+    </form>
+
+</div>
+</body>
+</html>
