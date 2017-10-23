@@ -64,19 +64,13 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/result")
     public ModelAndView viewUsers() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("form", userService.findAll());
-        modelAndView.setViewName("result");
-        //return new ModelAndView("result","form",userService.findAll());
-        return modelAndView;
+        return new ModelAndView("result", "form", userService.findAll());
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView update(@ModelAttribute UserForm updateobject) {
-        ModelAndView modelAndView = new ModelAndView("update");
-        modelAndView.addObject("updateobject", updateobject);
-        return modelAndView;
+        return new ModelAndView("update", "updateobject", updateobject);
     }
 
     @RequestMapping(value = "/updateuser")
@@ -85,6 +79,7 @@ public class UserController {
 
         CurrentUser userDetails =
                 (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(userDetails.getRole().toString());
         if (userDetails.getRole().toString() == "ADMIN") {
             modelAndView.setViewName("redirect:result");
         } else if (userDetails.getRole().toString() == "USER") {
@@ -98,17 +93,14 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/approve", method = RequestMethod.POST)
     public ModelAndView approve(@ModelAttribute UserForm approveobject) {
-        ModelAndView modelAndView = new ModelAndView("approve");
-        modelAndView.addObject("approveobject", approveobject);
-        return modelAndView;
+        return new ModelAndView("approve", "approveobject", approveobject);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/approveuser")
     public ModelAndView approveService(@ModelAttribute("approveobject") UserForm form) {
-        ModelAndView modelAndView = new ModelAndView("redirect:result");
         userService.adminApprove(form);
-        return modelAndView;
+        return new ModelAndView("redirect:result");
     }
 
 
@@ -119,9 +111,8 @@ public class UserController {
         CurrentUser userDetails =
                 (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if (userDetails.getUser().isApproved() != false) {
+        if (userDetails.getUser().isApproved()) {
             modelAndView.addObject("userobject", userService.findUserById(userDetails.getUser().getId()));
-            System.out.println(userDetails.getUser().getId().toString());
             modelAndView.setViewName("userinfo");
         } else {
             modelAndView.setViewName("redirect:denied");
