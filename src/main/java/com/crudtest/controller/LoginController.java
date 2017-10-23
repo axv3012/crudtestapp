@@ -11,15 +11,17 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login() {
-
-        ModelAndView modelAndView = new ModelAndView("login");
-
-        return modelAndView;
+        return new ModelAndView("login");
     }
 
     @RequestMapping(value = "/loggedout", method = RequestMethod.GET)
     public ModelAndView logout() {
         return new ModelAndView("welcome");
+    }
+
+    @RequestMapping(value = "/loginfailure", method = RequestMethod.GET)
+    public ModelAndView loginFailed() {
+        return new ModelAndView("login", "loginError", true);
     }
 
 

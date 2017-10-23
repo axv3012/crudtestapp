@@ -10,7 +10,9 @@
 <body>
 <div class="container">
     <h1>Login Page</h1>
-    <!--<p th:if="${loginError}" class="error">Wrong user or password</p-->
+    <div th:if="${loginError}">
+        <p>Your username or password do not match. Please try again.</p>
+    </div>
     <form th:action="@{/login}" method="post">
 
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
