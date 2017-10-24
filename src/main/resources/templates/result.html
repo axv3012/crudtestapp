@@ -41,6 +41,12 @@
                         <button type="submit" class="btn btn-primary">Approve</button>
                     </form>
                 </td>
+                <td>
+                    <form th:action="@{/delete}" method = "post" th:object="${updateobject}">
+                        <input type="hidden" id="id" name="id" th:value="${user.id}"/>
+                        <button type = "submit" class="btn btn-primary">Delete</button>
+                    </form>
+                </td>
             </tr>
         </table>
     </div>

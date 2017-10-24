@@ -19,4 +19,6 @@ public interface UserService {
     List<User> findAll();
 
     User adminApprove(UserForm userForm);
+
+    void deleteUser(UserForm userForm);
 }

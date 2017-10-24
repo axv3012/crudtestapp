@@ -60,6 +60,13 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
+    public void deleteUser(UserForm userForm) {
+        User deleteUser = new User();
+        deleteUser.setId(userForm.getId());
+        userRepository.delete(deleteUser);
+    }
+
+    @Override
     public Optional<User> findUserById(Long id) {
         return Optional.ofNullable(userRepository.findOne(id));
     }

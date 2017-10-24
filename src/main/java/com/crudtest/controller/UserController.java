@@ -119,4 +119,11 @@ public class UserController {
         }
         return modelAndView;
     }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(value = "/delete")
+    public ModelAndView deleteUser(@ModelAttribute UserForm updateobject){
+        userService.deleteUser(updateobject);
+        return new ModelAndView("redirect:result");
+    }
 }
