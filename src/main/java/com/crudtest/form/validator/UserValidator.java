@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 @Component
 public class UserValidator implements Validator {
 
-    Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+    private Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
     @Override
@@ -30,7 +30,7 @@ public class UserValidator implements Validator {
 
     }
 
-    public void validateEmail(UserForm userForm, Errors errors) {
+    private void validateEmail(UserForm userForm, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "email.form",
                 "Please don't leave email empty or with whitespaces");
 
@@ -43,7 +43,7 @@ public class UserValidator implements Validator {
         }
     }
 
-    public void validatePassword(UserForm userForm, Errors errors) {
+    private void validatePassword(UserForm userForm, Errors errors) {
 
         ValidationUtils.rejectIfEmpty(errors, "password", "password.invalid", "Please input an password");
 
