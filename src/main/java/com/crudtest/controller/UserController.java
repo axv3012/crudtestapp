@@ -46,16 +46,15 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView addUser(@ModelAttribute("form") @Valid UserForm form, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-
-        if (userService.findOneByEmail(form.getEmail()).isPresent()) {
+        try {
+            if (bindingResult.hasErrors()) {
+                modelAndView.setViewName("register");
+            } else {
+                userService.saveUser(form);
+                modelAndView.setViewName("redirect:/");
+            }
+        } catch (IllegalArgumentException e) {
             bindingResult.rejectValue("email", "email", "There is already a user registered with the email provided.");
-            modelAndView.setViewName("register");
-        }
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("register");
-        } else {
-            userService.saveUser(form);
-            modelAndView.setViewName("redirect:/");
         }
         modelAndView.addObject("form", form);
         return modelAndView;
@@ -122,7 +121,7 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete")
-    public ModelAndView deleteUser(@ModelAttribute UserForm updateobject){
+    public ModelAndView deleteUser(@ModelAttribute UserForm updateobject) {
         userService.deleteUser(updateobject);
         return new ModelAndView("redirect:result");
     }

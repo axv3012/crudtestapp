@@ -21,6 +21,9 @@ public class DefaultUserService implements UserService {
 
     @Override
     public User saveUser(UserForm userForm) {
+        if (userRepository.findOneByEmail(userForm.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Email already exists.");
+        }
         User newUser = new User();
         newUser.setId(userForm.getId());
         newUser.setFirstName(userForm.getFirstName());
