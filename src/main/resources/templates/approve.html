@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Approve</title>
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>User can now log in</h1>
+    <form method="post" th:action="@{/approveuser}" th:object="${approveobject}">
+        <input type="hidden" th:value="${approveobject.id}" id="id" name="id"/>
+        <input type="submit" value="Go back" class="btn btn-primary"/>
+    </form>
+</div>
+</body>
+</html>
